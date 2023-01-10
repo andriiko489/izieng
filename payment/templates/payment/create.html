@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <style>
+        .demo-container {
+            width: 100%;
+            max-width: 350px;
+            margin: 50px auto;
+        }
+
+        form {
+            margin: 30px;
+        }
+
+        input {
+            width: 200px;
+            margin: 10px auto;
+            display: block;
+        }
+    </style>
+    <div class="demo-container">
+        <div class="card-wrapper"></div>
+
+        <div class="form-container active">
+          <form method="post">
+          {% csrf_token %}
+            <input placeholder="Card number" type="tel" name="cardnumber" required id="id_cardnumber">
+            <input placeholder="Full name" type="text" name="name" id="id_name">
+            <input placeholder="MM/YY" type="tel" name="expirationdate" required id="id_expirationdate">
+            <input placeholder="CVC" maxlength="3" type="number" name="securitycode" id="id_securitycode" >
+            <input type="submit" value="Продовжити">
+          </form>
+        </div>
+    </div>
+    <script src="{% static 'card-master/dist/card.js'%}"></script>
+    <script>
+        var c = new Card({
+            form: document.querySelector('form'),
+            container: '.card-wrapper'
+        });
+    </script>
+  </body>
+</html>
